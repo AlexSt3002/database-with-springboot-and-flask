@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Medici</title>
+    <style>
+        :root {
+            --background-light: #f0f4f8;
+            --text-light: #333;
+            --background-dark: #181a1b;
+            --text-dark: #f5f5f5;
+            --card-light: #fff;
+            --card-dark: #242526;
+            --button-light: #4CAF50;
+            --button-dark: #00a884;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            font-weight: bold;
+        }
+
+        form, table {
+            background: var(--card-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        table {
+            width: 90%;
+            margin-top: 3rem;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--background-light);
+        }
+
+        input, select, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--button-light);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        body.dark-mode {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        body.dark-mode form,
+        body.dark-mode table {
+            background: var(--card-dark);
+        }
+
+        body.dark-mode th {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        body.dark-mode button {
+            background-color: var(--button-dark);
+        }
+
+        body.dark-mode button:hover {
+            background-color: #00795f;
+        }
+
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            button {
+                font-size: 1rem;
+            }
+        }
+         :root {
+             --background-light: #f0f4f8;
+             --text-light: #333;
+             --background-dark: #181a1b;
+             --text-dark: #f5f5f5;
+             --card-light: #fff;
+             --card-dark: #242526;
+             --button-light: #4CAF50;
+             --button-dark: #00a884;
+         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2 {
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        form {
+            background: var(--card-light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            transition: background-color 0.3s ease;
+        }
+
+        form label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        form input[type="text"]:focus {
+            border-color: var(--button-light);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+        }
+
+        form button {
+            background-color: var(--button-light);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        form button:active {
+            background-color: #3b8d40;
+            transform: scale(0.98);
+        }
+
+        form span {
+            color: red;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+
+        body.dark-mode {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        body.dark-mode form {
+            background: var(--card-dark);
+        }
+
+        body.dark-mode form label {
+            color: var(--text-dark);
+        }
+
+        body.dark-mode form input[type="text"] {
+            background-color: #2b2c2e;
+            color: var(--text-dark);
+            border: 1px solid #555;
+        }
+
+        body.dark-mode form input[type="text"]:focus {
+            border-color: var(--button-dark);
+            box-shadow: 0 0 5px rgba(0, 168, 132, 0.6);
+        }
+
+        body.dark-mode form button {
+            background-color: var(--button-dark);
+        }
+
+
+        @media (max-width: 768px) {
+            form {
+                width: 95%;
+            }
+
+            form button {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+    <script>
+        const translations = {
+            en: {
+                toggleDarkMode: "Toggle Dark Mode",
+                title: "Doctors List",
+                searchSpecialization: "Search by Specialization:",
+                chooseSpecialization: "Choose specialization",
+                generalist: "Generalist",
+                cardiology: "Cardiology",
+                neurology: "Neurology",
+                pediatrics: "Pediatrics",
+                search: "Search",
+                actions: "Actions",
+                addDoctor: "Add New Doctor",
+                saveChanges: "Save Changes",
+                confirmSave: "Are you sure you want to save?",
+                delete: "Delete",
+                name: "Name",
+                surname: "Surname",
+                gender: "Gender",
+                specialization: "Specialization",
+                email: "Email",
+                phone: "Phone",
+                hospital: "Hospital",
+                save: "Save",
+                id: "ID",
+                nameColumn: "Name",
+                surnameColumn: "Surname",
+                genderColumn: "Gender",
+                specializationColumn: "Specialization",
+                emailColumn: "Email",
+                phoneColumn: "Phone",
+                hospitalColumn: "Hospital"
+            },
+            ro: {
+                toggleDarkMode: "Comută modul întunecat",
+                title: "Lista Medicilor",
+                searchSpecialization: "Căutare Specializare:",
+                chooseSpecialization: "Alege specializarea",
+                generalist: "Generalist",
+                cardiology: "Cardiologie",
+                neurology: "Neurologie",
+                pediatrics: "Pediatrie",
+                search: "Căutare",
+                actions: "Acțiuni",
+                addDoctor: "Adaugă Medic Nou",
+                saveChanges: "Salvează modificările",
+                confirmSave: "Sunteți sigur că doriți să salvați?",
+                delete: "Șterge",
+                name: "Nume",
+                surname: "Prenume",
+                gender: "Sex",
+                specialization: "Specializare",
+                email: "Email",
+                phone: "Telefon",
+                hospital: "Spital",
+                save: "Salvează",
+                id: "ID",
+                nameColumn: "Nume",
+                surnameColumn: "Prenume",
+                genderColumn: "Sex",
+                specializationColumn: "Specializare",
+                emailColumn: "Email",
+                phoneColumn: "Telefon",
+                hospitalColumn: "Spital",
+
+            }
+        };
+
+
+        function changeLanguage(language) {
+            const elements = {
+                toggleDarkMode: document.querySelector("button[onclick='toggleDarkMode()']"),
+                title: document.querySelector("h1"),
+                searchSpecialization: document.querySelector("label[for='specializare1']"),
+                chooseSpecialization: document.querySelector("#specializare1 option:first-child"),
+                generalist: document.querySelector("#specializare1 option:nth-child(2)"),
+                cardiology: document.querySelector("#specializare1 option:nth-child(3)"),
+                neurology: document.querySelector("#specializare1 option:nth-child(4)"),
+                pediatrics: document.querySelector("#specializare1 option:nth-child(5)"),
+                search: document.querySelector("form#cauta-specializare button"),
+                actions: document.querySelector("th:nth-child(9)"),
+                addDoctor: document.querySelector("h2"),
+                name: document.querySelectorAll("label[for='edit_nume'],label[for='nume']"),
+                surname: document.querySelectorAll("label[for='edit_prenume'],label[for='prenume']"),
+                gender: document.querySelectorAll("label[for='edit_sex'],label[for='sex']"),
+                specialization: document.querySelectorAll("label[for='edit_specializare'],label[for='specializare']"),
+                email: document.querySelectorAll("label[for='edit_email'],label[for='email']"),
+                phone: document.querySelectorAll("label[for='edit_telefon'],label[for='telefon']"),
+                hospital: document.querySelectorAll("label[for='edit_spital'],label[for='spital']"),
+                save: document.querySelectorAll("form#adauga button,form#modifica button"),
+                delete: document.querySelectorAll("form#delete button"),
+                idColumn: document.querySelector("th:nth-child(1)"),
+                nameColumn: document.querySelector("th:nth-child(2)"),
+                surnameColumn: document.querySelector("th:nth-child(3)"),
+                genderColumn: document.querySelector("th:nth-child(4)"),
+                specializationColumn: document.querySelector("th:nth-child(5)"),
+                emailColumn: document.querySelector("th:nth-child(6)"),
+                phoneColumn: document.querySelector("th:nth-child(7)"),
+                hospitalColumn: document.querySelector("th:nth-child(8)")
+            };
+
+
+            elements.toggleDarkMode.textContent = translations[language].toggleDarkMode;
+            elements.title.textContent = translations[language].title;
+            elements.searchSpecialization.textContent = translations[language].searchSpecialization;
+            elements.chooseSpecialization.textContent = translations[language].chooseSpecialization;
+            elements.generalist.textContent = translations[language].generalist;
+            elements.cardiology.textContent = translations[language].cardiology;
+            elements.neurology.textContent = translations[language].neurology;
+            elements.pediatrics.textContent = translations[language].pediatrics;
+            elements.search.textContent = translations[language].search;
+            elements.actions.textContent = translations[language].actions;
+            elements.addDoctor.textContent = translations[language].addDoctor;
+            elements.name.forEach(el => el.textContent = translations[language].name + ":");
+            elements.surname.forEach(el => el.textContent = translations[language].surname + ":");
+            elements.gender.forEach(el => el.textContent = translations[language].gender + ":");
+            elements.specialization.forEach(el => el.textContent = translations[language].specialization + ":");
+            elements.email.forEach(el => el.textContent = translations[language].email + ":");
+            elements.phone.forEach(el => el.textContent = translations[language].phone + ":");
+            elements.hospital.forEach(el => el.textContent = translations[language].hospital + ":");
+            elements.save.forEach(el => el.textContent = translations[language].save);
+            elements.idColumn.textContent = translations[language].id;
+            elements.delete.forEach(el => el.textContent = translations[language].delete);
+            elements.nameColumn.textContent = translations[language].name;
+            elements.surnameColumn.textContent = translations[language].surname;
+            elements.genderColumn.textContent = translations[language].gender;
+            elements.specializationColumn.textContent = translations[language].specialization;
+            elements.emailColumn.textContent = translations[language].email;
+            elements.phoneColumn.textContent = translations[language].phone;
+            elements.hospitalColumn.textContent = translations[language].hospital;
+        }
+        async function deleteEmployee(employeeId) {
+            if (confirm("Ești sigur că vrei să ștergi acest medic?")) {
+                const response = await fetch(`/medici/delete`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ id: employeeId }),
+                });
+                if (response.ok) {
+                    const message = await response.text();
+                    alert(message);
+                    window.location.href = "/medici";}
+            }
+        }
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const mode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', mode);
+        }
+
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+    </script>
+
+
+</head>
+<body>
+<button onclick="changeLanguage('en')" style="position: absolute; top: 60px; right: 20px; padding: 10px 20px;">
+    English
+</button>
+<button onclick="changeLanguage('ro')" style="position: absolute; top: 100px; right: 20px; padding: 10px 20px;">
+    Română
+</button>
+<button onclick="toggleDarkMode()" style="position: absolute; top: 20px; right: 20px; padding: 10px 20px;">
+    Comută modul intunecat
+</button>
+<h1>Lista Medicilor</h1>
+
+<div th:if="${message}" class="alert alert-success" role="alert">
+    <span style="color: green;" th:text="${message}"></span>
+
+</div>
+
+<p th:if="${error}" style="color: red;" th:text="${error}"></p>
+
+
+<form id="cauta-specializare" th:action="@{/medici/search}" method="post">
+    <label for="specializare1">Căutare Specializare:</label>
+    <select id="specializare1" name="specializare">
+        <option value="" disabled th:selected="${specializare == null}">Alege specializarea</option>
+        <option value="Generalist" th:selected="${specializare == 'Generalist'}">Generalist</option>
+        <option value="Cardiologie" th:selected="${specializare == 'Cardiologie'}">Cardiologie</option>
+        <option value="Neurologie" th:selected="${specializare == 'Neurologie'}">Neurologie</option>
+        <option value="Pediatrie" th:selected="${specializare == 'Pediatrie'}">Pediatrie</option>
+        <option value="Gastrologie" th:selected="${specializare == 'Gastrologie'}">Gastrologie</option>
+    </select>
+    <button type="submit">Căutare</button>
+</form>
+
+
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nume</th>
+        <th>Prenume</th>
+        <th>Sex</th>
+        <th>Specializare</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Spital</th>
+        <th>Acțiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="medic : ${medici}">
+        <td th:text="${medic.id}"></td>
+        <td th:text="${medic.nume}"></td>
+        <td th:text="${medic.prenume}"></td>
+        <td th:text="${medic.sex}"></td>
+        <td th:text="${medic.specializare}"></td>
+        <td th:text="${medic.email}"></td>
+        <td th:text="${medic.telefon}"></td>
+        <td th:text="${medic.spital}"></td>
+        <td>
+
+            <form id="modifica" th:action="@{/medici/update}" method="post" class="inline-form">
+                <input type="hidden" name="id" th:value="${medic.id}">
+
+
+                <label for="edit_nume">Nume:</label>
+                <input type="text" id="edit_nume" name="nume" th:value="${medic.nume}">
+                <span th:if="${errorNume}" style="color: red;" th:text="${errorNume}"></span>
+                <br>
+
+
+                <label for="edit_prenume">Prenume:</label>
+                <input type="text" id="edit_prenume" name="prenume" th:value="${medic.prenume}">
+                <span th:if="${errorPrenume}" style="color: red;" th:text="${errorPrenume}"></span>
+                <br>
+
+
+                <label for="edit_sex">Sex:</label>
+                <input type="text" id="edit_sex" name="sex" th:value="${medic.sex}">
+                <span th:if="${errorSex}" style="color: red;" th:text="${errorSex}"></span>
+                <br>
+
+
+                <label for="edit_specializare">Specializare:</label>
+                <input type="text" id="edit_specializare" name="specializare" th:value="${medic.specializare}">
+                <span th:if="${errorSpecializare}" style="color: red;" th:text="${errorSpecializare}"></span>
+                <br>
+
+
+                <label for="edit_email">Email:</label>
+                <input type="text" id="edit_email" name="email" th:value="${medic.email}">
+                <span th:if="${errorEmail}" style="color: red;" th:text="${errorEmail}"></span>
+                <br>
+
+
+                <label for="edit_telefon">Telefon:</label>
+                <input type="text" id="edit_telefon" name="telefon" th:value="${medic.telefon}">
+                <span th:if="${errorTelefon}" style="color: red;" th:text="${errorTelefon}"></span>
+                <br>
+
+
+                <label for="edit_spital">Spital:</label>
+                <input type="text" id="edit_spital" name="spital" th:value="${medic.spital}">
+                <span th:if="${errorSpital}" style="color: red;" th:text="${errorSpital}"></span>
+                <br>
+
+                <button type="submit" onclick="return confirm('Sunteti sigur ca doriti sa salvati?')">Salvează
+
+                </button>
+            </form>
+
+            <form id="delete">
+            <button type="submit" th:onclick="'deleteEmployee(' + ${medic.id} + ')'">Șterge</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Adaugă Medic Nou</h2>
+
+
+<form id="adauga" th:action="@{/medici/create}" method="post">
+    <label for="nume">Nume:</label>
+    <input type="text" id="nume" name="nume" th:value="${newMedic.nume}">
+    <span th:if="${errorNume}" style="color: red;" th:text="${errorNume}"></span>
+    <br>
+
+    <label for="prenume">Prenume:</label>
+    <input type="text" id="prenume" name="prenume" th:value="${newMedic.prenume}">
+    <span th:if="${errorPrenume}" style="color: red;" th:text="${errorPrenume}"></span>
+    <br>
+
+    <label for="sex">Sex:</label>
+    <input type="text" id="sex" name="sex" th:value="${newMedic.sex}">
+    <span th:if="${errorSex}" style="color: red;" th:text="${errorSex}"></span>
+    <br>
+
+    <label for="specializare">Specializare:</label>
+    <input type="text" id="specializare" name="specializare" th:value="${newMedic.specializare}">
+    <span th:if="${errorSpecializare}" style="color: red;" th:text="${errorSpecializare}"></span>
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" th:value="${newMedic.email}">
+    <span th:if="${errorEmail}" style="color: red;" th:text="${errorEmail}"></span>
+    <br>
+
+    <label for="telefon">Telefon:</label>
+    <input type="text" id="telefon" name="telefon" th:value="${newMedic.telefon}">
+    <span th:if="${errorTelefon}" style="color: red;" th:text="${errorTelefon}"></span>
+    <br>
+
+    <label for="spital">Spital:</label>
+    <input type="text" id="spital" name="spital" th:value="${newMedic.spital}">
+    <span th:if="${errorSpital}" style="color: red;" th:text="${errorSpital}"></span>
+    <br>
+
+    <button type="submit" onclick="return confirm('Sunteti sigur ca doriti sa salvati?')">Salvează</button>
+</form>
+
+</body>
+</html>
